@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         josefin: ["Josefin Sans", "sans-serif"],
       },
+      boxShadow: {
+        "white-sh": "0px 35px 50px -15px rgba(194, 195, 214, 0.50)",
+      },
     },
   },
   plugins: [],

@@ -1,7 +1,12 @@
+import TodoContainer from "./components/TodoContainer";
+
+import Header from "./components/Header";
+
 function App() {
   return (
-    <div>
-      <p>hello</p>
+    <div className="flex justify-center items-center flex-col">
+      <Header />
+      <TodoContainer />
     </div>
   );
 }
