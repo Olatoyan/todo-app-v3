@@ -7,6 +7,7 @@ const todoSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: [true, "Please add a task"],
+    unique: true,
   },
   completed: {
     type: Boolean,
