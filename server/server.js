@@ -4,11 +4,14 @@
 // import app from "./app.js";
 
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
 const app = require("./app");
 
-dotenv.config({ path: "./.env" });
+const dotenv = require("dotenv");
 
+const path = require("path");
+
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+console.log(__dirname);
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
   console.log("UNCAUGHT EXCEPTION 💥 Shutting down...");
