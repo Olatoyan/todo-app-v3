@@ -7,7 +7,9 @@ function TodoItems({ name, completed }: { name: string; completed: boolean }) {
     <li className="flex items-center gap-10 py-9 px-10 border-b border-[#e3e4f1]">
       <button className="h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] bg-transparent"></button>
 
-      <h2 className="text-[#494c6b] text-[1.8rem] font-normal tracking-[-0.025rem] w-full focus:border-none focus:outline-none">
+      <h2
+        className={`text-[1.8rem] font-normal tracking-[-0.025rem] w-full focus:border-none focus:outline-none ${isCompleted ? "line-through text-[#d1d2da]" : "text-[#494c6b]"}`}
+      >
         {name}
       </h2>
     </li>

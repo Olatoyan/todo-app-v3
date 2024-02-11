@@ -7,18 +7,15 @@ function TodoList() {
   const { allTodo, isPending } = useTodo();
 
   if (isPending) return <p className="text-4xl ">Loading</p>;
-  const { todos } = allTodo;
+  const { todos } = allTodo!;
   console.log(todos);
 
   return (
     <div className="bg-white shadow-white-sh">
-      {/* <TodoItems />
-      <TodoItems />
-      <TodoItems /> */}
       {todos.length > 0
         ? todos.map((todo) => (
             <TodoItems
-              key={todo.id}
+              key={todo.__id}
               name={todo.name}
               completed={todo.completed}
             />
