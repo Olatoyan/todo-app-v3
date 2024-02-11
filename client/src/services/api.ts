@@ -15,22 +15,31 @@ export async function getTodos(): Promise<getTodoProps> {
     return data;
   } catch (error) {
     console.error("Error fetching todos:", error);
-    throw error; // Re-throw the error to handle it in the caller
+    console.log(error);
+    throw new Error(); // Re-throw the error to handle it in the caller
   }
 }
 
 export async function createTodo(name: string) {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name }),
-  });
-  if (!response.ok) {
-    throw new Error("Failed to create todo");
-  }
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    });
+    console.log(response);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error(errorData.message || "Failed to create todo");
+    }
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error creating todo:", error);
+    throw error; // Re-throw the error to handle it in the caller
+  }
 }

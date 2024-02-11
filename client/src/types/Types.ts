@@ -6,6 +6,6 @@ export type getTodoProps = {
 
 type todoProps = {
   name: string;
-  __id: number;
+  _id: number;
   completed: boolean;
 };

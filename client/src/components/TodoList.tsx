@@ -15,7 +15,7 @@ function TodoList() {
       {todos.length > 0
         ? todos.map((todo) => (
             <TodoItems
-              key={todo.__id}
+              key={todo._id}
               name={todo.name}
               completed={todo.completed}
             />
