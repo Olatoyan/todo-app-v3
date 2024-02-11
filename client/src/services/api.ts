@@ -75,13 +75,38 @@ export async function deleteTodo(id: number) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        DeleteCompleted: "no",
       },
       body: JSON.stringify({ id }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to edit todo");
+      throw new Error(errorData.message || "Failed to delete todo");
+    }
+
+    console.log(response);
+
+    return;
+  } catch (error) {
+    console.error("Error deleting todo:", error);
+    throw error;
+  }
+}
+
+export async function deleteCompletedTodo() {
+  try {
+    const response = await fetch(API_URL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        DeleteCompleted: "yes",
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to delete todo");
     }
 
     console.log(response);

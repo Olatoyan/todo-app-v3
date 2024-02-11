@@ -39,7 +39,15 @@ exports.createTodo = catchAsync(async (req, res) => {
 });
 
 exports.deleteTodo = catchAsync(async (req, res) => {
-  const todo = await Todo.findByIdAndDelete(req.body.id);
+  let query;
+  console.log(req.headers.deletecompleted);
+  if (req.headers.deletecompleted === "yes") {
+    query = Todo.deleteMany({ completed: true });
+  } else {
+    req.headers.deletecompleted === "no" &&
+      (query = Todo.findByIdAndDelete(req.body.id));
+  }
+  const todo = await query;
 
   if (!todo) {
     return next(new AppError("No todo found with that ID", 404));
@@ -71,5 +79,18 @@ exports.editTodo = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     todo,
+  });
+});
+
+exports.deleteCompletedTodo = catchAsync(async (req, res, next) => {
+  const todo = await Todo.deleteMany({ completed: true });
+
+  if (!todo) {
+    return next(new AppError("No todo found with that ID", 404));
+  }
+
+  res.status(204).json({
+    status: "success",
+    data: null,
   });
 });
