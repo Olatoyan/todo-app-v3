@@ -16,7 +16,7 @@ export async function getTodos(): Promise<getTodoProps> {
   } catch (error) {
     console.error("Error fetching todos:", error);
     console.log(error);
-    throw new Error(); // Re-throw the error to handle it in the caller
+    throw error; // Re-throw the error to handle it in the caller
   }
 }
 
@@ -40,6 +40,29 @@ export async function createTodo(name: string) {
     return data;
   } catch (error) {
     console.error("Error creating todo:", error);
+    throw error; // Re-throw the error to handle it in the caller
+  }
+}
+
+export async function editTodo(id: number, name: string, completed: boolean) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, name, completed }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to edit todo");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error editing todo:", error);
     throw error; // Re-throw the error to handle it in the caller
   }
 }
