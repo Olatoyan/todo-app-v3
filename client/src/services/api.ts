@@ -2,11 +2,6 @@ import { getTodoProps } from "../types/Types";
 
 const API_URL = "http://127.0.0.1:8000/api/v1/todos";
 
-type propss = {
-  data: getTodoProps;
-  error: any;
-};
-
 export async function getTodos(): Promise<getTodoProps> {
   try {
     const response = await fetch(API_URL);
