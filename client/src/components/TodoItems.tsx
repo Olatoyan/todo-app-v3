@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEditTodo } from "./useEditTodo";
+import { useDeleteTodo } from "./useDeleteTodo";
 import MiniSpinner from "./MiniSpinner";
 
 function TodoItems({
@@ -16,6 +17,7 @@ function TodoItems({
   const [isEditing, setIsEditing] = useState(false);
 
   const { editTodo, isUpdating } = useEditTodo();
+  const { deleteTodo, isDeleting } = useDeleteTodo();
 
   function handleEditTodo(updatedIsCompleted: boolean) {
     editTodo(
@@ -28,6 +30,10 @@ function TodoItems({
     );
   }
 
+  function handleDeleteTodo() {
+    deleteTodo(id);
+  }
+
   function handleToggleTodo() {
     setIsCompleted((prev) => !prev);
     handleEditTodo(!isCompleted);
@@ -37,7 +43,7 @@ function TodoItems({
     <>
       {isEditing ? (
         <form
-          className="py-9 px-10 border-b border-[#e3e4f1] flex items-center justify-between"
+          className="flex items-center justify-between border-b border-[#e3e4f1] px-10 py-9"
           onSubmit={(e) => {
             e.preventDefault();
             handleEditTodo(isCompleted);
@@ -47,7 +53,7 @@ function TodoItems({
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="text-[1.8rem] font-normal tracking-[-0.025rem] border-0 focus:border-none focus:outline-0 w-[80%]"
+            className="w-[80%] border-0 text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-0"
           />
 
           <div className="flex gap-4">
@@ -66,28 +72,38 @@ function TodoItems({
           </div>
         </form>
       ) : (
-        <li className="flex items-center gap-10 py-9 px-10 border-b border-[#e3e4f1]">
+        <li className="flex items-center gap-10 border-b border-[#e3e4f1] px-10 py-9">
           <button
             className={`h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] ${isCompleted ? "bg-red-500" : "bg-transparent"}`}
             onClick={handleToggleTodo}
           ></button>
 
           <h2
-            className={`text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-none ${isCompleted ? "line-through text-[#d1d2da]" : "text-[#494c6b]"}`}
+            className={`text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-none ${isCompleted ? "text-[#d1d2da] line-through" : "text-[#494c6b]"}`}
           >
             {name}
           </h2>
 
-          <button className="flex items-center gap-4 ml-auto">
-            <img
-              src="icon-edit.svg"
-              alt="edit icon"
-              className={`${isCompleted ? "hidden" : "block"}`}
-              onClick={() => {
-                setIsEditing(!isEditing);
-              }}
-            />
-            <img src="icon-delete.svg" alt="delete icon" />
+          <button className="ml-auto flex items-center gap-4">
+            {isDeleting ? (
+              <MiniSpinner />
+            ) : (
+              <>
+                <img
+                  src="icon-edit.svg"
+                  alt="edit icon"
+                  className={`${isCompleted ? "hidden" : "block"}`}
+                  onClick={() => {
+                    setIsEditing(!isEditing);
+                  }}
+                />
+                <img
+                  src="icon-delete.svg"
+                  alt="delete icon"
+                  onClick={handleDeleteTodo}
+                />
+              </>
+            )}
           </button>
         </li>
       )}
