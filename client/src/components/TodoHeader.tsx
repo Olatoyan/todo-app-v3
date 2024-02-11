@@ -4,7 +4,7 @@ function TodoHeader() {
   const { isDarkMode, setIsDarkMode } = useTodoContext();
   return (
     <div className="flex items-center justify-between">
-      <h1 className="text-[4rem] font-bold tracking-[1.5rem] text-white">
+      <h1 className="tablet:text-[2.8rem] tablet:tracking-[0.5rem] text-[4rem] font-bold tracking-[1.5rem] text-white">
         TODO
       </h1>
       <div>

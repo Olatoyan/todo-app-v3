@@ -19,7 +19,7 @@ function Header() {
 
   return (
     <header
-      className="h-[30rem] w-screen bg-cover transition-all duration-500 ease-in-out"
+      className="tablet:h-[22rem] h-[30rem] w-screen bg-cover transition-all duration-500 ease-in-out"
       style={{
         backgroundImage: bgImage,
       }}

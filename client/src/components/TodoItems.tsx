@@ -89,7 +89,7 @@ function TodoItems({
         </form>
       ) : (
         <li
-          className={`flex items-center gap-10 border-b border-[#e3e4f1] px-10 py-9  ${isDarkMode ? "border-[#393a4b]" : "border-[#e3e4f1]"}`}
+          className={`tablet:px-5 flex items-center gap-10 border-b border-[#e3e4f1] px-10 py-9 ${isDarkMode ? "border-[#393a4b]" : "border-[#e3e4f1]"}`}
         >
           <button
             className={`relative h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] ${isCompleted ? "bg-check-gradient before:absolute before:left-[30%] before:top-[30%] before:h-[2rem] before:w-[2rem] before:content-[url(./icon-check.svg)]" : "bg-transparent"}`}

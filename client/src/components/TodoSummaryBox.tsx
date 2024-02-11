@@ -17,7 +17,7 @@ function TodoSummaryBox() {
         {allTodo!.results} items left
       </p>
 
-      <div className="z-[9999] flex gap-4 text-[1.4rem] font-bold tracking-[-0.0194rem]">
+      <div className="tablet:hidden z-[9999] flex gap-4 text-[1.4rem] font-bold tracking-[-0.0194rem]">
         <Link
           to="/all"
           className={`${id === "all" ? "text-[#3A7CFD]" : isDarkMode ? "text-[#5b5e7e] hover:text-[#e3e4f1]" : "text-[#9495a5] hover:text-[#494c6b]"}`}

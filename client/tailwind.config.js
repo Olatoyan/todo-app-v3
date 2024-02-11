@@ -13,6 +13,9 @@ export default {
       backgroundImage: {
         "check-gradient": "linear-gradient(135deg, #55DDFF 0%, #C058F3 100%)",
       },
+      screens: {
+        tablet: { max: "37.5em" },
+      },
     },
   },
   plugins: [],
