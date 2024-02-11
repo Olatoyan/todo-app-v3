@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const todoRoutes = require("./routes/todoRoutes");
 const globalErrorHandler = require("./controllers/errorController");
+const cors = require("cors");
 
 const app = express();
 
@@ -9,6 +10,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(morgan("dev"));
 }
 
+app.use(cors());
+app.options("*", cors());
 // Body parser, reading data from body into req.body
 app.use(express.json());
 
