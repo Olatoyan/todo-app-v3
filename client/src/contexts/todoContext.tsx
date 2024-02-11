@@ -1,33 +1,38 @@
-// import { createContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
+import type { ReactNode } from "react";
 
-// type todoStateProps = {
-//   name: string;
-//   completed: boolean;
-// };
+type TodoContextProps = {
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+const TodoContext = createContext<TodoContextProps>(null!);
 
-// const enum todoActionType {
-//   TODO_GET_ALL_TODO,
-//   TODO_ADD_NEW_TODO,
-//   TODO_DELETE_TODO,
-//   TODO_UPDATE_TODO,
-// }
+function TodoProvider({ children }: { children: ReactNode }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-// type todoAction = {
-//   type: todoActionType;
-//   payload?: string;
-// };
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    );
 
-// const todoContext = createContext();
+    setIsDarkMode(darkModeMediaQuery.matches);
+  }, []);
 
-// const initialState: todoStateProps = {
-//   // todo: [],
-//   name: "",
-//   completed: false,
-// };
+  return (
+    <TodoContext.Provider value={{ isDarkMode, setIsDarkMode }}>
+      {children}
+    </TodoContext.Provider>
+  );
+}
 
-// function todoReducer(state: todoStateProps, action: todoAction) {
-//   switch (action.type) {
-//     case todoActionType.TODO_GET_ALL_TODO: {
-//     }
-//   }
-// }
+function useTodoContext() {
+  const context = useContext(TodoContext);
+
+  if (!context) {
+    throw new Error("useTodoContext must be used within a TodoProvider");
+  }
+
+  return context;
+}
+
+export { TodoProvider, useTodoContext };

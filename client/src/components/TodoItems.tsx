@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useEditTodo } from "./useEditTodo";
 import { useDeleteTodo } from "./useDeleteTodo";
 import MiniSpinner from "./MiniSpinner";
+import { useTodoContext } from "../contexts/todoContext";
 
 function TodoItems({
   id,
@@ -19,6 +20,7 @@ function TodoItems({
 
   const { editTodo, isUpdating } = useEditTodo();
   const { deleteTodo, isDeleting } = useDeleteTodo();
+  const { isDarkMode } = useTodoContext();
 
   function handleEditTodo(updatedIsCompleted: boolean) {
     editTodo(
@@ -50,7 +52,7 @@ function TodoItems({
     <>
       {isEditing ? (
         <form
-          className="flex items-center justify-between border-b border-[#e3e4f1] px-10 py-9"
+          className={`flex items-center justify-between rounded-[0.5rem] border-b px-10 py-9 ${isDarkMode ? "border-[#393a4b] bg-white" : "border-[#e3e4f1] bg-[#a8a9b3]"}`}
           onSubmit={(e) => {
             e.preventDefault();
             handleEditTodo(isCompleted);
@@ -61,7 +63,7 @@ function TodoItems({
             ref={inputRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            className="w-[80%] border-0 text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-0"
+            className={`w-[80%] border-0 bg-transparent text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-0 ${isDarkMode ? "text-black" : "text-[#494c6b]"}`}
           />
 
           <div className="flex items-center gap-6">
@@ -86,14 +88,18 @@ function TodoItems({
           </div>
         </form>
       ) : (
-        <li className="flex items-center gap-10 border-b border-[#e3e4f1] px-10 py-9">
+        <li
+          className={`flex items-center gap-10 border-b border-[#e3e4f1] px-10 py-9  ${isDarkMode ? "border-[#393a4b]" : "border-[#e3e4f1]"}`}
+        >
           <button
             className={`relative h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] ${isCompleted ? "bg-check-gradient before:absolute before:left-[30%] before:top-[30%] before:h-[2rem] before:w-[2rem] before:content-[url(./icon-check.svg)]" : "bg-transparent"}`}
             onClick={handleToggleTodo}
           ></button>
-
           <h2
-            className={`text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-none ${isCompleted ? "text-[#d1d2da] line-through" : "text-[#494c6b]"}`}
+            className={`text-[1.8rem] font-normal tracking-[-0.025rem] focus:border-none focus:outline-none ${isCompleted ? "line-through" : ""} 
+           
+            ${isDarkMode && isCompleted ? "text-[#4d5067]" : isDarkMode && !isCompleted ? "text-[#c8cbe7]" : !isDarkMode && isCompleted ? "text-[#d1d2da]" : "text-[#494c6b]"}
+            `}
           >
             {name}
           </h2>
