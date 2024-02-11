@@ -9,18 +9,19 @@ function TodoInputField() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     createTodo(value);
+    setValue("");
   }
 
   return (
     <form
-      className="bg-white flex items-center justify-center py-9 px-8 rounded-[0.5rem] shadow-white-sh gap-10"
+      className={`flex items-center justify-center py-9 px-8 rounded-[0.5rem] shadow-white-sh gap-10 ${isCreating ? "bg-slate-400" : "bg-white"}`}
       onSubmit={handleSubmit}
     >
       <button className="h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] bg-transparent"></button>
       <input
         placeholder="Create a new todo..."
         type="text"
-        className="text-[#393a4b] placeholder:text-[#9495a5] text-[1.8rem] font-normal tracking-[-0.025rem] w-full focus:border-none focus:outline-none disabled:bg-red-500"
+        className="text-[#393a4b] placeholder:text-[#9495a5] text-[1.8rem] font-normal tracking-[-0.025rem] w-full focus:border-none focus:outline-none bg-transparent"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={isCreating}

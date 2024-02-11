@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEditTodo } from "./useEditTodo";
+import MiniSpinner from "./MiniSpinner";
 
 function TodoItems({
   id,
@@ -16,10 +17,9 @@ function TodoItems({
 
   const { editTodo, isUpdating } = useEditTodo();
 
-  function handleEditTodo() {
-    console.log(isCompleted);
+  function handleEditTodo(updatedIsCompleted: boolean) {
     editTodo(
-      { id, name: value, completed: isCompleted },
+      { id, name: value, completed: updatedIsCompleted },
       {
         onSuccess: () => {
           setIsEditing(false);
@@ -28,10 +28,21 @@ function TodoItems({
     );
   }
 
+  function handleToggleTodo() {
+    setIsCompleted((prev) => !prev);
+    handleEditTodo(!isCompleted);
+  }
+
   return (
     <>
       {isEditing ? (
-        <div className="py-9 px-10 border-b border-[#e3e4f1] flex items-center justify-between">
+        <form
+          className="py-9 px-10 border-b border-[#e3e4f1] flex items-center justify-between"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleEditTodo(isCompleted);
+          }}
+        >
           <input
             type="text"
             value={value}
@@ -40,26 +51,25 @@ function TodoItems({
           />
 
           <div className="flex gap-4">
-            <button className="">
-              <img
-                src="./icon-update.svg"
-                alt="update icon"
-                onClick={handleEditTodo}
-              />
-            </button>
-            <button className="" onClick={() => setIsEditing(!isEditing)}>
-              <img src="./icon-cross.svg" alt="cross icon" />
-            </button>
+            {isUpdating ? (
+              <MiniSpinner />
+            ) : (
+              <>
+                <button className="">
+                  <img src="./icon-update.svg" alt="update icon" />
+                </button>
+                <div className="" onClick={() => setIsEditing(!isEditing)}>
+                  <img src="./icon-cross.svg" alt="cross icon" />
+                </div>
+              </>
+            )}
           </div>
-        </div>
+        </form>
       ) : (
         <li className="flex items-center gap-10 py-9 px-10 border-b border-[#e3e4f1]">
           <button
             className={`h-[2.4rem] w-[2.62rem] rounded-full border border-[#e3e4f1] ${isCompleted ? "bg-red-500" : "bg-transparent"}`}
-            onClick={() => {
-              setIsCompleted(!isCompleted);
-              handleEditTodo();
-            }}
+            onClick={handleToggleTodo}
           ></button>
 
           <h2
