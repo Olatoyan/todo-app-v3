@@ -2,9 +2,11 @@ import { getTodoProps } from "../types/Types";
 
 const API_URL = "http://127.0.0.1:8000/api/v1/todos";
 
-export async function getTodos(): Promise<getTodoProps> {
+export async function getTodos(
+  type: "all" | "active" | "completed",
+): Promise<getTodoProps> {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/${type}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch todos");

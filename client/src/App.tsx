@@ -1,9 +1,8 @@
-import TodoContainer from "./components/TodoContainer";
-
-import Header from "./components/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
+import { Route, Routes } from "react-router-dom";
+import Todo from "./components/Todo";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,9 +17,10 @@ function App() {
     // <div className="flex justify-center items-center flex-col">
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <Header />
-      <TodoContainer />
-
+      <Routes>
+        <Route path="/" element={<Todo />} />
+        <Route path="/:id" element={<Todo />} />
+      </Routes>
       <Toaster
         position="top-center"
         gutter={12}

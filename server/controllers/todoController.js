@@ -3,7 +3,21 @@ const AppError = require("./../utils/appError");
 const Todo = require("./../models/todoModel");
 
 exports.getAllTodos = catchAsync(async (req, res) => {
-  const todo = await Todo.find().select("-__v");
+  let query;
+
+  if (req.params.type === "all") {
+    query = Todo.find();
+  }
+
+  if (req.params.type === "completed") {
+    query = Todo.find({ completed: true });
+  }
+
+  if (req.params.type === "active") {
+    query = Todo.find({ completed: false });
+  }
+
+  const todo = await query.select("-__v");
 
   res.status(200).json({
     status: "success",

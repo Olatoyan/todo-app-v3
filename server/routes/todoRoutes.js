@@ -12,4 +12,6 @@ router
   .delete(deleteTodo)
   .patch(editTodo);
 
+router.route("/:type").get(getAllTodos);
+
 module.exports = router;

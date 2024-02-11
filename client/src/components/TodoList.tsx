@@ -4,7 +4,7 @@ import TodoSummaryBox from "./TodoSummaryBox";
 import { useTodo } from "./useTodo";
 
 function TodoList() {
-  const { allTodo, isPending } = useTodo();
+  const { allTodo, isPending } = useTodo("all");
 
   if (isPending) return <p className="text-4xl ">Loading</p>;
   const { todos } = allTodo!;
