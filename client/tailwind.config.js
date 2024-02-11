@@ -9,6 +9,9 @@ export default {
       boxShadow: {
         "white-sh": "0px 35px 50px -15px rgba(194, 195, 214, 0.50)",
       },
+      backgroundImage: {
+        "check-gradient": "linear-gradient(135deg, #55DDFF 0%, #C058F3 100%)",
+      },
     },
   },
   plugins: [],

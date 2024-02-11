@@ -4,9 +4,9 @@ import { useDeleteCompletedTodo } from "./useDeleteCompletedTodo";
 import { useParams } from "react-router-dom";
 
 function TodoSummaryBox() {
+  const { id } = useParams();
   const { allTodo } = useTodo();
   const { deleteCompletedTodo } = useDeleteCompletedTodo();
-  const { id } = useParams();
 
   console.log(allTodo);
   return (
@@ -15,7 +15,7 @@ function TodoSummaryBox() {
         {allTodo!.results} items left
       </p>
 
-      <div className="flex gap-4 text-[1.4rem] font-bold tracking-[-0.0194rem]">
+      <div className="z-[9999] flex gap-4 text-[1.4rem] font-bold tracking-[-0.0194rem]">
         <Link
           to="/all"
           className={`${id === "all" ? "text-[#3A7CFD]" : "text-[#9495a5]"}`}
