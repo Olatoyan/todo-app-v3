@@ -7,9 +7,9 @@ export function useEditTodo() {
   const { mutate: editTodo, isPending: isUpdating } = useMutation({
     mutationFn: (data: { id: number; name: string; completed: boolean }) =>
       editTodoApi(data.id, data.name, data.completed),
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      toast.success(`Your task has been renamed to "${data.todo.name}"`);
+      toast.success("Todo has been edited");
     },
     onError: (error) => {
       toast.error(error.message);
