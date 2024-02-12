@@ -8,7 +8,7 @@ const todoSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please input a task. Task cannot be empty"],
     unique: true,
-    maxLength: [25, "Task cannot be more than 15 characters"],
+    maxLength: [25, "Task cannot be more than 25 characters"],
   },
   completed: {
     type: Boolean,
