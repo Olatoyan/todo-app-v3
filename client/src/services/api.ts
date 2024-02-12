@@ -1,6 +1,6 @@
 import { getTodoProps } from "../types/Types";
 
-const API_URL = "https://toyan-todo-v3.vercel.app/api/v1/todos";
+const API_URL = "https://toyan-todo-v3-api.vercel.app/api/v1/todos";
 
 export async function getTodos(
   type: "all" | "active" | "completed",
