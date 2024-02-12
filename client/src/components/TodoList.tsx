@@ -10,7 +10,7 @@ function TodoList() {
   if (isPending)
     return (
       <div
-        className={`rounded-[0.5rem] transition-none ${isDarkMode ? "shadow-black-sh bg-[#25273d] text-[#c5c6f6]" : "bg-white text-[#5b5e7e] shadow-white-sh"}`}
+        className={`rounded-[0.5rem] transition-none ${isDarkMode ? "bg-[#25273d] text-[#c5c6f6] shadow-black-sh" : "bg-white text-[#5b5e7e] shadow-white-sh"}`}
       >
         <p className="py-24 text-center text-[1.8rem] font-normal tracking-[-0.025rem]">
           Hold on while we get your tasks😁....
@@ -18,11 +18,10 @@ function TodoList() {
       </div>
     );
   const { todos } = allTodo!;
-  console.log(todos);
 
   return (
     <div
-      className={`${isDarkMode ? "shadow-black-sh bg-[#25273d]" : "bg-white shadow-white-sh"} rounded-[0.5rem]`}
+      className={`${isDarkMode ? "bg-[#25273d] shadow-black-sh" : "bg-white shadow-white-sh"} rounded-[0.5rem]`}
     >
       {todos.length > 0 ? (
         todos.map((todo) => (

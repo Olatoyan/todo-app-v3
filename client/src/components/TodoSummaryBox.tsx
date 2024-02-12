@@ -10,7 +10,6 @@ function TodoSummaryBox() {
   const { deleteCompletedTodo } = useDeleteCompletedTodo();
   const { isDarkMode } = useTodoContext();
 
-  console.log(allTodo);
   return (
     <footer className="flex items-center justify-between px-8 py-11">
       <p className="text-[1.4rem] tracking-[-0.0194rem] text-[#9495a5]">

@@ -7,8 +7,7 @@ export function useDeleteTodo() {
   const queryClient = useQueryClient();
   const { mutate: deleteTodo, isPending: isDeleting } = useMutation({
     mutationFn: (id: number) => deleteTodoApi(id),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       toast.success("Todo has been deleted");
     },

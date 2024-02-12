@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Todo from "./components/Todo";
 import { TodoProvider } from "./contexts/todoContext";
 
@@ -15,11 +15,11 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    // <div className="flex justify-center items-center flex-col">
     <QueryClientProvider client={queryClient}>
       <TodoProvider>
         <ReactQueryDevtools initialIsOpen={false} />
         <Routes>
+          <Route index element={<Navigate replace to="all" />} />
           <Route path="/" element={<Todo />} />
           <Route path="/:id" element={<Todo />} />
         </Routes>
@@ -41,7 +41,6 @@ function App() {
         />
       </TodoProvider>
     </QueryClientProvider>
-    // </div>
   );
 }
 

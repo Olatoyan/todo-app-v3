@@ -10,8 +10,7 @@ export function useDeleteCompletedTodo(): {
   const queryClient = useQueryClient();
   const { mutate: deleteCompletedTodo, isPending: isDeleting } = useMutation({
     mutationFn: deleteCompletedTodoApi,
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       toast.success("All completed todo tasks have been deleted");
     },

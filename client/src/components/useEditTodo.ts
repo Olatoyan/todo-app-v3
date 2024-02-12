@@ -8,9 +8,8 @@ export function useEditTodo() {
     mutationFn: (data: { id: number; name: string; completed: boolean }) =>
       editTodoApi(data.id, data.name, data.completed),
     onSuccess: (data) => {
-      console.log(data);
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      toast.success("Todo has been edited");
+      toast.success(`Your task has been renamed to "${data.todo.name}"`);
     },
     onError: (error) => {
       toast.error(error.message);

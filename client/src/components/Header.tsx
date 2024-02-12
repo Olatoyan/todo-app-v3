@@ -3,7 +3,7 @@ import { useTodoContext } from "../contexts/todoContext";
 function Header() {
   const { isDarkMode } = useTodoContext();
   const isMobile = window.innerWidth <= 600;
-  console.log(isDarkMode);
+
 
   let bgImage: string;
 

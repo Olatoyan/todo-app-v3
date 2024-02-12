@@ -17,7 +17,6 @@ export async function getTodos(
     return data;
   } catch (error) {
     console.error("Error fetching todos:", error);
-    console.log(error);
     throw error;
   }
 }
@@ -31,10 +30,8 @@ export async function createTodo(name: string) {
       },
       body: JSON.stringify({ name }),
     });
-    console.log(response);
     if (!response.ok) {
       const errorData = await response.json();
-      console.log(errorData);
       throw new Error(errorData.message || "Failed to create todo");
     }
 
@@ -85,8 +82,6 @@ export async function deleteTodo(id: number) {
       throw new Error(errorData.message || "Failed to delete todo");
     }
 
-    console.log(response);
-
     return;
   } catch (error) {
     console.error("Error deleting todo:", error);
@@ -108,8 +103,6 @@ export async function deleteCompletedTodo() {
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to delete todo");
     }
-
-    console.log(response);
 
     return;
   } catch (error) {
